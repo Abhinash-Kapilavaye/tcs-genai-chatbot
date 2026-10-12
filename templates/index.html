@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCS GenAI Assistant</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">T</div>
+                <div>
+                    <h2>TCS GenAI</h2>
+                    <p>Document Assistant</p>
+                </div>
+            </div>
+
+            <a href="/" class="new-chat">＋ New Chat</a>
+
+            <p class="sidebar-heading">TRY ASKING</p>
+
+            <form action="/tcs" method="POST" class="suggestions">
+                <button name="tcs_question" value="What is the revenue of TCS?" type="submit">
+                ◇ What is the revenue of TCS?
+            </button>
+
+                <button name="tcs_question" value="What are the main services offered by TCS?" type="submit">
+                ◇ TCS services
+            </button>
+
+                <button name="tcs_question" value="Explain the cloud services offered by TCS." type="submit">
+                ◇ Cloud services
+            </button>
+
+                <button name="tcs_question" value="What is the vision of TCS?" type="submit">
+                ◇ TCS vision
+            </button>
+            </form>
+
+            <div class="sidebar-footer">
+                <span>●</span> RAG-powered AI
+            </div>
+        </aside>
+
+
+        <!-- Main Chat Area -->
+        <main class="main">
+
+            <header class="topbar">
+                <div>
+                    <h1>TCS GenAI Chatbot</h1>
+                    <p>Ask questions about your TCS documents</p>
+                </div>
+
+                <div class="model-badge">
+                    ✦ Gemini
+                </div>
+            </header>
+
+
+            <!-- Conversation -->
+            <section class="conversation">
+
+                {% if question %}
+                <div class="message user-message">
+                    <div class="avatar user-avatar">U</div>
+
+                    <div class="message-content">
+                        <span class="message-label">You</span>
+                        <p>{{ question }}</p>
+                    </div>
+                </div>
+                {% endif %} {% if answer %}
+                <div class="message bot-message">
+                    <div class="avatar bot-avatar">✦</div>
+
+                    <div class="message-content">
+                        <span class="message-label">TCS AI Assistant</span>
+                        <div class="answer-text">{{ answer }}</div>
+                        <div class="answer-footer">
+                            Generated using your TCS documents
+                        </div>
+                    </div>
+                </div>
+
+                {% elif error %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+
+                {% else %}
+                <div class="welcome">
+                    <div class="welcome-icon">✦</div>
+
+                    <h2>How can I help you today?</h2>
+
+                    <p>
+                        Ask a question about TCS and get answers from your indexed PDF documents.
+                    </p>
+                </div>
+                {% endif %}
+
+            </section>
+
+
+            <!-- Question Form -->
+            <div class="composer-wrapper">
+
+                <form action="/tcs" method="POST" class="composer">
+
+                    <input type="text" name="tcs_question" placeholder="Ask anything about TCS..." value="" required autocomplete="off">
+
+                    <button type="submit" class="send-button" aria-label="Send question">
+                    ↑
+                </button>
+
+                </form>
+
+                <p class="disclaimer">
+                    AI-generated answers may contain mistakes. Verify important information against your source documents.
+                </p>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

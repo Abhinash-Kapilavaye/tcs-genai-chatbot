@@ -1,0 +1,29 @@
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+env/
+chatbotenv/
+.venv/
+
+# API keys and environment variables
+.env
+.env.*
+
+# PDF documents
+documents/*.pdf
+templates/documents/*.pdf
+*.pdf
+
+# FAISS vector database
+tcs_doc_index/
+faiss_db/
+
+# Editor and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
